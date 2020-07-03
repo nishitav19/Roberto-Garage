@@ -5,6 +5,7 @@ import { Box, AppBar, Toolbar, Typography, Button, IconButton, ListItemText, Lis
 import MenuIcon from '@material-ui/icons/Menu'
 import MenuSlider from '@material-ui/core/Drawer'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -83,7 +84,10 @@ const Navbar = () => {
                 </IconButton>
             </div>
             <List className={classes.list}>
-                <ListItem button divider>
+                <ListItem button divider component={Link} to="/">
+                    <ListItemText primary="Home" />
+                </ListItem>
+                <ListItem button divider component={Link} to="/about">
                     <ListItemText primary="About" />
                 </ListItem>
                 <ListItem button divider>
