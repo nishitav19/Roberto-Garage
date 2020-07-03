@@ -4,10 +4,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Box, AppBar, Toolbar, Typography, Button, IconButton, ListItemText, ListItem, List } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import MenuSlider from '@material-ui/core/Drawer'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
+        flexGrow: 1
     },
     title: {
         flexGrow: 1
@@ -18,6 +19,14 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh'
     },
     list: {
+        color: 'whitesmoke',
+        top: '25%'
+    },
+    drawerHeader: {
+        display: 'flex',
+        justifyContent: 'flex-end'
+    },
+    iconColor: {
         color: 'whitesmoke'
     }
 
@@ -46,25 +55,39 @@ const pathVariants = {
     }
 };
 
+
 const Navbar = () => {
     const [sidemenu, setSidemenu] = useState({
         isOpen: false
     })
 
-    const toggleSlider = (slider, open) => () => {
-        setSidemenu({ ...sidemenu, [slider]: open })
+    const handleClick = () => {
+        setSidemenu({
+            isOpen: true
+        })
+    }
+
+    const handleClose = () => {
+        setSidemenu({
+            isOpen: false
+        })
     }
 
     const classes = useStyles()
 
-    const sideList = slider => (
-        <Box className={classes.menuSlider} component="div" onClick={toggleSlider(slider, false)}>
+    const sideList = () => (
+        <Box className={classes.menuSlider} component="div">
+            <div className={classes.drawerHeader}>
+                <IconButton onClick={handleClose}>
+                    <ChevronLeftIcon className={classes.iconColor} />
+                </IconButton>
+            </div>
             <List className={classes.list}>
                 <ListItem button divider>
                     <ListItemText primary="About" />
                 </ListItem>
                 <ListItem button divider>
-                    <ListItemText primary="Our Work" />
+                    <ListItemText primary="Services" />
                 </ListItem>
                 <ListItem button divider>
                     <ListItemText primary="Contact" />
@@ -78,7 +101,7 @@ const Navbar = () => {
             <div className={classes.root}>
                 <AppBar position="static" style={{ background: '#212121' }}>
                     <Toolbar>
-                        <IconButton onClick={toggleSlider("isOpen", true)} color="inherit" aria-label="menu">
+                        <IconButton onClick={handleClick} color="inherit" aria-label="menu">
                             <MenuIcon />
                         </IconButton>
                         <motion.svg style={{
@@ -101,9 +124,9 @@ const Navbar = () => {
                         </motion.svg>
                         <Typography variant="h6" className={classes.title}>
                             Roberto & Co.
-                    </Typography>
-                        <MenuSlider open={sidemenu.isOpen} onClose={toggleSlider("isOpen", false)}>
-                            {sideList("isOpen")}
+                        </Typography>
+                        <MenuSlider open={sidemenu.isOpen} onClose={handleClose}>
+                            {sideList()}
                         </MenuSlider>
                         <Button color="inherit">Login</Button>
                     </Toolbar>

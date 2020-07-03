@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Navbar from './layout/Navbar'
+import { Box } from '@material-ui/core'
+
 
 const HomePage = () => {
+
     return (
-        <div>
+        <Fragment>
             <Navbar />
-        </div>
+            <Box component="div">
+            </Box>
+        </Fragment>
     )
 }
 
