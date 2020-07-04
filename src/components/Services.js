@@ -34,7 +34,7 @@ function Services() {
                     <Typography variant="h4" align="center" style={{ marginTop: '60px' }}>
                         Services
                     </Typography>
-                    <Card className={classes.root}>
+                    <Card className={classes.root} data-aos="fade-up">
                         <CardMedia
                             component="img"
                             height="250"
@@ -50,7 +50,7 @@ function Services() {
                         </CardContent>
                     </Card>
 
-                    <Card className={classes.root}>
+                    <Card className={classes.root} data-aos="fade-up">
                         <CardMedia
                             component="img"
                             height="250"
@@ -68,7 +68,7 @@ function Services() {
                         </CardContent>
                     </Card>
 
-                    <Card className={classes.root}>
+                    <Card className={classes.root} data-aos="fade-up">
                         <CardMedia
                             component="img"
                             height="250"
@@ -91,21 +91,26 @@ function Services() {
                         A collection of cars we've renovated with passion
                     </Typography>
                 </Box>
-                <div style={{ marginTop: '40px' }}>
-                    <div>
-                        <img src={grid2} alt="" style={{ width: '25%' }} />
-                        <img src={grid3} alt="" style={{ width: '25%' }} />
-                        <img src={grid4} alt="" style={{ width: '25%' }} />
-                        <img src={grid5} alt="" style={{ width: '25%' }} />
-                        <img src={grid1} alt="" style={{ width: '25%' }} />
-                        <img src={grid6} alt="" style={{ width: '25%' }} />
-                        <img src={grid7} alt="" style={{ width: '25%' }} />
-                        <img src={grid8} alt="" style={{ width: '25%' }} />
+                <div style={{ marginTop: '50px', marginBottom: '60px' }}>
+                    <div data-aos="fade-up" style={{ marginLeft: '15%' }}>
+                        <img src={grid2} alt="" style={gridImg} />
+                        <img src={grid3} alt="" style={gridImg} />
+                        <img src={grid4} alt="" style={gridImg} />
+                        <img src={grid5} alt="" style={gridImg} />
+                        <img src={grid1} alt="" style={gridImg} />
+                        <img src={grid6} alt="" style={gridImg} />
+                        <img src={grid7} alt="" style={gridImg} />
+                        <img src={grid8} alt="" style={gridImg} />
                     </div>
                 </div>
             </Container>
         </Fragment>
     );
+}
+
+const gridImg = {
+    width: '20%',
+    marginRight: '5px'
 }
 
 const Img1Style = {

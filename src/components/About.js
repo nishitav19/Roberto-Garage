@@ -7,7 +7,8 @@ import lounge from './images/lounge.jpg'
 const useStyles = makeStyles({
     root: {
         minWidth: 555,
-        display: 'inline-block'
+        display: 'inline-block',
+        margin: '10px 0 60px 0'
     }
 });
 
@@ -16,7 +17,7 @@ const About = () => {
     return (
         <Fragment>
             <Container maxWidth="sm">
-                <Grid item xs={12}>
+                <Grid item xs={12} data-aos="fade-up">
                     <Grid container justify="center" style={{ margin: '60px 0 60px 0' }}>
                         <Paper elevation={3}>
                             <Typography variant="h4" align="center" style={{ marginTop: '60px' }}>
@@ -34,10 +35,10 @@ const About = () => {
                         </Paper>
                     </Grid>
                 </Grid>
-                <Card className={classes.root}>
+                <Card className={classes.root} data-aos="fade-up">
                     <CardMedia
                         component="img"
-                        height="250"
+                        height="320"
                         style={ImgStyle}
                     />
                     <CardContent>
