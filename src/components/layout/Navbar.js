@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const svgVariants = {
-    hidden: { rotate: -180 },
+    hidden: { rotate: -5 },
     visible: {
         rotate: 0,
         transition: { duration: 1 }
@@ -54,7 +54,7 @@ const pathVariants = {
             ease: "easeInOut"
         }
     }
-};
+}
 
 
 const Navbar = () => {
@@ -87,10 +87,7 @@ const Navbar = () => {
                 <ListItem button divider component={Link} to="/">
                     <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem button divider component={Link} to="/about">
-                    <ListItemText primary="About" />
-                </ListItem>
-                <ListItem button divider>
+                <ListItem button divider component={Link} to="/services">
                     <ListItemText primary="Services" />
                 </ListItem>
                 <ListItem button divider>
