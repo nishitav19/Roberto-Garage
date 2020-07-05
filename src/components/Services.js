@@ -33,7 +33,7 @@ function Services() {
                 <Box>
                     <Typography variant="h4" align="center" style={{ marginTop: '60px' }}>
                         Services
-                    </Typography>
+                        </Typography>
                     <Card className={classes.root} data-aos="fade-up">
                         <CardMedia
                             component="img"
@@ -41,12 +41,12 @@ function Services() {
                             style={Img1Style}
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
+                            <Typography gutterBottom variant="h6" component="h2">
                                 Upholstery
-                    </Typography>
+                                </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 A Range of Fabrics, Including Vintage Leathers, & Wide Variety of Colors
-                    </Typography>
+                                </Typography>
                         </CardContent>
                     </Card>
 
@@ -57,14 +57,14 @@ function Services() {
                             style={Img2Style}
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
+                            <Typography gutterBottom variant="h6" component="h2">
                                 Repairs
-                        </Typography>
+                                </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 General Repairs,
                                 Specialist Repairs
                                 & Vintage Parts
-                        </Typography>
+                                </Typography>
                         </CardContent>
                     </Card>
 
@@ -75,21 +75,21 @@ function Services() {
                             style={Img3Style}
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
+                            <Typography gutterBottom variant="h6" component="h2">
                                 Paint
-                        </Typography>
+                                </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Spray paint, Custom Stencilling & Variety of Custom Made Artwork
-                        </Typography>
+                                </Typography>
                         </CardContent>
                     </Card>
 
                     <Typography variant="h4" align="center" style={{ marginTop: '60px' }}>
                         Our Work
-                    </Typography>
+                        </Typography>
                     <Typography variant="h6" align="center" style={{ marginTop: '20px' }}>
                         A collection of cars we've renovated with passion
-                    </Typography>
+                        </Typography>
                 </Box>
                 <div style={{ marginTop: '50px', marginBottom: '60px' }}>
                     <div data-aos="fade-up" style={{ marginLeft: '15%' }}>

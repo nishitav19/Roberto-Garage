@@ -23,7 +23,7 @@ const About = () => {
                             <Typography variant="h4" align="center" style={{ marginTop: '60px' }}>
                                 About
                             </Typography>
-                            <Typography variant="body1" align="justify" style={{ margin: '50px' }}>
+                            <Typography variant="body1" align="justify" style={{ margin: '50px', fontWeight: 300 }}>
                                 Roberto & Co. is established by experts in the automotive industry
                                 to deliver flawless repair and maintenance of your vintage car. Our state
                                 of the art facility is located in 500 Terry Francois Street, San Francisco,
