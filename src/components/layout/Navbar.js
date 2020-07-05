@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1
     },
     menuSlider: {
-        width: 250,
+        width: 230,
         backgroundColor: '#212121',
         height: '100vh'
     },
@@ -104,7 +104,7 @@ const Navbar = () => {
     return (
         <Fragment>
             <div className={classes.root}>
-                <AppBar position="static" style={{ background: '#212121' }}>
+                <AppBar position="fixed" style={{ background: '#212121' }}>
                     <Toolbar>
                         <Hidden mdUp>
                             <IconButton onClick={handleClick} color="inherit" aria-label="menu">
