@@ -29,7 +29,6 @@ const useStyles = makeStyles({
     }
 })
 
-
 const Contact = () => {
     const classes = useStyles()
     return (
@@ -43,25 +42,18 @@ const Contact = () => {
                                 <Avatar className={classes.avatar}>
                                     <LockOutlinedIcon />
                                 </Avatar>
-                                <Typography variant="h4" align="center" style={{ color: 'whitesmoke', paddingTop: '25px' }}>
-                                    Sign Up
+                                <Typography variant="h4" align="center" style={{ color: 'whitesmoke', paddingTop: '30px' }}>
+                                    Sign In
                                 </Typography>
                                 <form noValidate autoComplete="off" style={formStyle}>
                                     <TextField
-                                        required
-                                        id="outlined-required"
-                                        label="Name"
-                                        defaultValue="Jonas Kahnwald"
-                                        variant="outlined"
-                                        style={{ marginTop: '45px' }}
-                                    />
-                                    <TextField
+                                        noWrap
                                         required
                                         id="outlined-required"
                                         label="Email"
                                         defaultValue="jonaskahnwald@gmail.com"
                                         variant="outlined"
-                                        style={{ marginTop: '20px' }}
+                                        style={{ marginTop: '50px' }}
                                     />
                                     <TextField
                                         required
@@ -79,12 +71,12 @@ const Contact = () => {
                                         variant="contained"
                                         color="primary"
                                         style={{ marginTop: '30px' }} >
-                                        Sign Up
+                                        Login
                                     </Button>
                                     <Grid container justify="flex-end" style={{ marginTop: '20px' }}>
                                         <Grid item>
-                                            <Link href="/login" variant="body2">
-                                                Already have an account? Sign in
+                                            <Link href="/register" variant="body2">
+                                                Go back
                                             </Link>
                                         </Grid>
                                     </Grid>
