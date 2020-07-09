@@ -3,7 +3,7 @@ import Navbar from './layout/Navbar'
 import Footer from './layout/Footer'
 import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
-import { Paper, Box, Container, Typography, Button } from '@material-ui/core'
+import { Paper, Box, Container, Typography, Button, Hidden } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import red from '@material-ui/core/colors/red'
 import Link from '@material-ui/core/Link'
@@ -20,6 +20,17 @@ const theme = createMuiTheme({
         }
     }
 })
+
+theme.typography.h4 = {
+    fontSize: '28px',
+    fontWeight: 400,
+    '@media (min-width:600px)': {
+        fontSize: '29px',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '30px',
+    }
+}
 
 const useStyles = makeStyles({
     avatar: {
@@ -93,7 +104,9 @@ const Contact = () => {
                         </Box>
                     </Container>
                 </Paper>
-                <Footer />
+                <Hidden xsDown>
+                    <Footer />
+                </Hidden>
             </Fragment>
         </ThemeProvider >
     )

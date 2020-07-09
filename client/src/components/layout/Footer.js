@@ -1,35 +1,36 @@
 import React, { Fragment } from 'react'
-import { AppBar, Toolbar, IconButton } from '@material-ui/core'
-import InstagramIcon from '@material-ui/icons/Instagram'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import FacebookIcon from '@material-ui/icons/Facebook'
-import PinterestIcon from '@material-ui/icons/Pinterest'
-import { makeStyles } from '@material-ui/core/styles'
+import { Box, Typography, Link } from '@material-ui/core'
+import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
-    iconStyle: {
-        color: 'whitesmoke',
-        flexGrow: 1
+let theme = createMuiTheme()
+theme = responsiveFontSizes(theme)
+
+theme.typography.body1 = {
+    fontSize: '14px',
+    '@media (min-width:600px)': {
+        fontSize: '15px',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '16px',
     }
-}))
+}
 
 const Footer = () => {
 
-    const classes = useStyles()
-
     return (
-        <Fragment>
-            <AppBar position="static" style={{ background: '#212121', bottom: 0 }}>
-                <Toolbar>
-                    <IconButton className={classes.iconStyle}>
-                        <InstagramIcon />
-                        <FacebookIcon />
-                        <TwitterIcon />
-                        <PinterestIcon />
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-        </Fragment>
+        <ThemeProvider theme={theme}>
+            <Fragment>
+                <Box position="static" style={{ background: '#212121', height: '55px', bottom: 0 }}>
+                    <Typography variant="body1" color="textSecondary" align="center" style={{ paddingTop: '18px', color: 'whitesmoke' }}>
+                        {'Copyright © '}
+                        <Link color="inherit" href="https://material-ui.com/">
+                            Roberto & Co.
+                    </Link>{' '}
+                        {new Date().getFullYear()}
+                    </Typography>
+                </Box>
+            </Fragment>
+        </ThemeProvider>
     )
 }
 

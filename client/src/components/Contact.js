@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react'
 import Navbar from './layout/Navbar'
 import Footer from './layout/Footer'
-import { ThemeProvider } from '@material-ui/styles'
-import { createMuiTheme } from '@material-ui/core/styles'
-import { Paper, Box, Container, Typography, Button, Grid } from '@material-ui/core'
+import { Paper, Box, Container, Typography, Button, Grid, Hidden } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import red from '@material-ui/core/colors/red'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
     palette: {
@@ -16,6 +15,37 @@ const theme = createMuiTheme({
     }
 })
 
+theme.typography.body1 = {
+    fontSize: '14px',
+    '@media (min-width:600px)': {
+        fontSize: '15px',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '16px',
+    }
+}
+
+theme.typography.body2 = {
+    fontSize: '13px',
+    '@media (min-width:600px)': {
+        fontSize: '14px',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '15px',
+    }
+}
+
+theme.typography.h4 = {
+    fontSize: '28px',
+    fontWeight: 400,
+    '@media (min-width:600px)': {
+        fontSize: '29px',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '30px',
+    }
+}
+
 const Contact = () => {
     return (
         <ThemeProvider theme={theme}>
@@ -25,7 +55,6 @@ const Contact = () => {
                     <Container maxWidth="xs">
                         <Box component="div">
                             <Paper elevation={3} style={{ backgroundColor: '#212121', padding: '30px' }}>
-
                                 <Typography variant="h4" align="center" style={{ color: 'whitesmoke', paddingTop: '15px' }}>
                                     Contact Us
                                 </Typography>
@@ -69,7 +98,9 @@ const Contact = () => {
                         </Box>
                     </Container>
                 </Paper>
-                <Footer />
+                <Hidden xsDown>
+                    <Footer />
+                </Hidden>
             </Fragment>
         </ThemeProvider >
     )
