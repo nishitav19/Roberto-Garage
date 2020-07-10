@@ -10,7 +10,6 @@ const Contact = require('../../models/Contact')
 // @access   Public
 router.post('/', [
     check('name', 'Name is required').not().isEmpty(),
-    check('tel', 'Phone number is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check('message', 'Message is required').not().isEmpty()
 ], async (req, res) => {
@@ -21,13 +20,12 @@ router.post('/', [
 
     res.send('Contact form submitted')
 
-    const { name, tel, email, message } = req.body
+    const { name, email, message } = req.body
 
     try {
 
         contact = new Contact({
             name,
-            tel,
             email,
             message
         })

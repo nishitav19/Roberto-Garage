@@ -3,8 +3,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Home from './components/Home'
 import Services from './components/Services'
 import Contact from './components/Contact'
-import Register from './components/Register'
-import Login from './components/Login'
+import Register from './components/auth/Register'
+import Login from './components/auth/Login'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function App() {

@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react'
-import Navbar from './layout/Navbar'
-import Footer from './layout/Footer'
+import React, { Fragment, useState } from 'react'
+import axios from 'axios'
+import Navbar from '../layout/Navbar'
+import Footer from '../layout/Footer'
 import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { Paper, Box, Container, Typography, Button, Hidden } from '@material-ui/core'
@@ -40,8 +41,54 @@ const useStyles = makeStyles({
     }
 })
 
-const Contact = () => {
+const Register = (props) => {
     const classes = useStyles()
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        password2: ''
+    })
+
+    const { name, email, password, password2 } = formData
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (password !== password2) {
+            console.log('Passwords do not match');
+        } else {
+            const newUser = {
+                name,
+                email,
+                password
+            }
+
+            try {
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+
+                const body = JSON.stringify(newUser)
+
+                const res = await axios.post('/api/users', body, config)
+                console.log(res.data);
+
+            } catch (error) {
+                console.error(error.response.data);
+            }
+        }
+    }
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Fragment>
@@ -53,26 +100,50 @@ const Contact = () => {
                                 <Avatar className={classes.avatar}>
                                     <LockOutlinedIcon />
                                 </Avatar>
-                                <Typography variant="h4" align="center" style={{ color: 'whitesmoke', paddingTop: '30px' }}>
-                                    Sign In
+                                <Typography variant="h4" align="center" style={{ color: 'whitesmoke', paddingTop: '25px' }}>
+                                    Sign Up
                                 </Typography>
-                                <form noValidate autoComplete="off" style={formStyle}>
+                                <form noValidate autoComplete="off" style={formStyle} onSubmit={handleSubmit}>
+                                    <TextField
+                                        required
+                                        id="outlined-required"
+                                        label="Name"
+                                        defaultValue="Jonas Kahnwald"
+                                        variant="outlined"
+                                        name="name"
+                                        onChange={handleChange}
+                                        style={{ marginTop: '45px' }}
+                                    />
                                     <TextField
                                         required
                                         id="outlined-required"
                                         label="Email"
                                         defaultValue="jonaskahnwald@gmail.com"
                                         variant="outlined"
-                                        style={{ marginTop: '50px' }}
+                                        name="email"
+                                        onChange={handleChange}
+                                        style={{ marginTop: '20px' }}
                                     />
                                     <TextField
                                         required
                                         id="outlined-required password"
                                         label="Password"
-                                        defaultValue="Email"
+                                        defaultValue="12345"
                                         variant="outlined"
                                         name="password"
                                         type="password"
+                                        onChange={handleChange}
+                                        style={{ marginTop: '20px' }}
+                                    />
+                                    <TextField
+                                        required
+                                        id="outlined-required password"
+                                        label="Confirm password"
+                                        defaultValue="12345"
+                                        variant="outlined"
+                                        name="password2"
+                                        type="password"
+                                        onChange={handleChange}
                                         style={{ marginTop: '20px' }}
                                     />
                                     <Button
@@ -81,12 +152,12 @@ const Contact = () => {
                                         variant="contained"
                                         color="primary"
                                         style={{ marginTop: '30px' }} >
-                                        Login
+                                        Sign Up
                                     </Button>
                                     <Grid container justify="flex-end" style={{ marginTop: '20px' }}>
                                         <Grid item>
-                                            <Link href="/register" variant="body2">
-                                                Go back
+                                            <Link href="/login" variant="body2">
+                                                Already have an account? Sign in
                                             </Link>
                                         </Grid>
                                     </Grid>
@@ -95,7 +166,7 @@ const Contact = () => {
                         </Box>
                     </Container>
                 </Paper>
-                <Hidden xsDwon>
+                <Hidden xsDown>
                     <Footer />
                 </Hidden>
             </Fragment>
@@ -108,4 +179,4 @@ const formStyle = {
     flexDirection: 'column'
 }
 
-export default Contact
+export default Register

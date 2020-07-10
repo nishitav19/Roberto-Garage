@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
+import axios from 'axios'
 import Navbar from './layout/Navbar'
 import Footer from './layout/Footer'
 import { Paper, Box, Container, Typography, Button, Grid, Hidden } from '@material-ui/core'
@@ -47,6 +48,59 @@ theme.typography.h4 = {
 }
 
 const Contact = () => {
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    })
+
+    const { name, email, message } = formData
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!name) {
+            alert('')
+        }
+        else if (!email) {
+            alert('Please enter your email address')
+        }
+        else if (!message) {
+            alert('Please enter your message')
+        }
+        else {
+            const newQuery = {
+                name,
+                email,
+                message
+            }
+
+            try {
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+
+                const body = JSON.stringify(newQuery)
+
+                const res = await axios.post('/api/contact', body, config)
+                console.log(res.data);
+                alert(res.data)
+
+            } catch (error) {
+                console.error(error.response.data);
+            }
+        }
+    }
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Fragment>
@@ -81,10 +135,30 @@ const Contact = () => {
                                         </Typography>
                                     </Grid>
                                 </Grid>
-                                <form noValidate autoComplete="off" style={formStyle}>
-                                    <TextField required id="standard-required" label="Name" defaultValue="" style={{ marginTop: '20px' }} />
-                                    <TextField required id="standard-required" label="Email" defaultValue="" style={{ marginTop: '10px' }} />
-                                    <TextField required id="standard-required" label="Message" defaultValue="" multiline="true" rowsMax="4" style={{ marginTop: '10px' }} />
+                                <form noValidate autoComplete="off" style={formStyle} onSubmit={handleSubmit}>
+                                    <TextField
+                                        required id="standard-required"
+                                        name="name"
+                                        label="Name"
+                                        defaultValue=""
+                                        style={{ marginTop: '20px' }}
+                                        onChange={handleChange} />
+                                    <TextField
+                                        required id="standard-required"
+                                        name="email"
+                                        label="Email"
+                                        defaultValue=""
+                                        style={{ marginTop: '10px' }}
+                                        onChange={handleChange} />
+                                    <TextField
+                                        required id="standard-required"
+                                        name="message"
+                                        label="Message"
+                                        defaultValue=""
+                                        multiline="true"
+                                        rowsMax="4"
+                                        style={{ marginTop: '10px' }}
+                                        onChange={handleChange} />
                                     <Button
                                         type="submit"
                                         fullWidth

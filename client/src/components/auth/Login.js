@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
-import Navbar from './layout/Navbar'
-import Footer from './layout/Footer'
+import React, { Fragment, useState } from 'react'
+import Navbar from '../layout/Navbar'
+import Footer from '../layout/Footer'
 import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { Paper, Box, Container, Typography, Button, Hidden } from '@material-ui/core'
@@ -40,9 +40,26 @@ const useStyles = makeStyles({
     }
 })
 
-
-const Contact = () => {
+const Login = () => {
     const classes = useStyles()
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    })
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+    }
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Fragment>
@@ -54,25 +71,19 @@ const Contact = () => {
                                 <Avatar className={classes.avatar}>
                                     <LockOutlinedIcon />
                                 </Avatar>
-                                <Typography variant="h4" align="center" style={{ color: 'whitesmoke', paddingTop: '25px' }}>
-                                    Sign Up
+                                <Typography variant="h4" align="center" style={{ color: 'whitesmoke', paddingTop: '30px' }}>
+                                    Sign In
                                 </Typography>
-                                <form noValidate autoComplete="off" style={formStyle}>
-                                    <TextField
-                                        required
-                                        id="outlined-required"
-                                        label="Name"
-                                        defaultValue="Jonas Kahnwald"
-                                        variant="outlined"
-                                        style={{ marginTop: '45px' }}
-                                    />
+                                <form noValidate autoComplete="off" style={formStyle} onSubmit={handleSubmit}>
                                     <TextField
                                         required
                                         id="outlined-required"
                                         label="Email"
                                         defaultValue="jonaskahnwald@gmail.com"
                                         variant="outlined"
-                                        style={{ marginTop: '20px' }}
+                                        name="email"
+                                        onChange={handleChange}
+                                        style={{ marginTop: '50px' }}
                                     />
                                     <TextField
                                         required
@@ -82,6 +93,7 @@ const Contact = () => {
                                         variant="outlined"
                                         name="password"
                                         type="password"
+                                        onChange={handleChange}
                                         style={{ marginTop: '20px' }}
                                     />
                                     <Button
@@ -90,12 +102,12 @@ const Contact = () => {
                                         variant="contained"
                                         color="primary"
                                         style={{ marginTop: '30px' }} >
-                                        Sign Up
+                                        Login
                                     </Button>
                                     <Grid container justify="flex-end" style={{ marginTop: '20px' }}>
                                         <Grid item>
-                                            <Link href="/login" variant="body2">
-                                                Already have an account? Sign in
+                                            <Link href="/register" variant="body2">
+                                                Don't have an account? Sign up
                                             </Link>
                                         </Grid>
                                     </Grid>
@@ -104,7 +116,7 @@ const Contact = () => {
                         </Box>
                     </Container>
                 </Paper>
-                <Hidden xsDown>
+                <Hidden xsDwon>
                     <Footer />
                 </Hidden>
             </Fragment>
@@ -117,4 +129,4 @@ const formStyle = {
     flexDirection: 'column'
 }
 
-export default Contact
+export default Login
