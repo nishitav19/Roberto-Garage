@@ -59,39 +59,37 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name) {
-            alert('')
-        }
-        else if (!email) {
-            alert('Please enter your email address')
-        }
-        else if (!message) {
-            alert('Please enter your message')
-        }
-        else {
-            const newQuery = {
-                name,
-                email,
-                message
-            }
 
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+        const newQuery = {
+            name,
+            email,
+            message
+        }
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
                 }
+            }
 
-                const body = JSON.stringify(newQuery)
+            const body = JSON.stringify(newQuery)
 
-                const res = await axios.post('/api/contact', body, config)
-                console.log(res.data);
-                alert(res.data)
+            const res = await axios.post('/api/contact', body, config)
+            console.log(res.data);
+            alert(res.data)
 
-            } catch (error) {
-                console.error(error.response.data);
+        } catch (error) {
+            const errors = error.response.data.errors
+            if (errors) {
+                // errors.forEach(error => alert(error.msg))
+                let l = errors.length
+                if (l > 0) {
+                    alert(errors[0].msg)
+                }
             }
         }
+
     }
 
     const handleChange = (e) => {

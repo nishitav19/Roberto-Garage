@@ -56,7 +56,7 @@ const Register = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (password !== password2) {
-            console.log('Passwords do not match');
+            alert('Passwords do not match');
         } else {
             const newUser = {
                 name,
@@ -77,7 +77,14 @@ const Register = (props) => {
                 console.log(res.data);
 
             } catch (error) {
-                console.error(error.response.data);
+                const errors = error.response.data.errors
+                if (errors) {
+                    // errors.forEach(error => alert(error.msg))
+                    let l = errors.length
+                    if (l > 0) {
+                        alert(errors[0].msg)
+                    }
+                }
             }
         }
     }

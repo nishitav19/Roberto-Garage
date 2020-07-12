@@ -18,7 +18,7 @@ router.post('/', [
         return res.status(400).json({ errors: errors.array() })
     }
 
-    res.send('Contact form submitted')
+    res.send('Your response is recorded!')
 
     const { name, email, message } = req.body
 
