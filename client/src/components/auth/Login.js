@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react'
+import axios from 'axios'
 import Navbar from '../layout/Navbar'
 import Footer from '../layout/Footer'
 import { ThemeProvider } from '@material-ui/styles'
@@ -7,6 +8,7 @@ import { Paper, Box, Container, Typography, Button, Hidden } from '@material-ui/
 import TextField from '@material-ui/core/TextField'
 import red from '@material-ui/core/colors/red'
 import Link from '@material-ui/core/Link'
+import { withRouter } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -40,7 +42,7 @@ const useStyles = makeStyles({
     }
 })
 
-const Login = () => {
+const Login = (props) => {
     const classes = useStyles()
 
     const [formData, setFormData] = useState({
@@ -48,9 +50,49 @@ const Login = () => {
         password: ''
     })
 
-    const handleSubmit = (e) => {
+    const { email, password } = formData
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        const newQuery = {
+            email,
+            password
+        }
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            const body = JSON.stringify(newQuery)
+
+            const res = await axios.post('/api/auth', body, config)
+            console.log(res.data);
+
+        } catch (error) {
+            const errors = error.response.data.errors
+            if (errors) {
+                // errors.forEach(error => alert(error.msg))
+                let l = errors.length
+                if (l > 0) {
+                    alert(errors[0].msg)
+                }
+            }
+        }
+    }
+    const initState = {
+        token: localStorage.getItem('token'),
+        isAuthenticated: false
+    }
+
+    const { token, isAuthenticated } = initState
+
+    if (token && isAuthenticated === true) {
+        if (email && password) {
+            props.history.push('/new')
+        }
     }
 
     const handleChange = (e) => {
@@ -79,7 +121,6 @@ const Login = () => {
                                         required
                                         id="outlined-required"
                                         label="Email"
-                                        defaultValue="jonaskahnwald@gmail.com"
                                         variant="outlined"
                                         name="email"
                                         onChange={handleChange}
@@ -89,7 +130,6 @@ const Login = () => {
                                         required
                                         id="outlined-required password"
                                         label="Password"
-                                        defaultValue="Email"
                                         variant="outlined"
                                         name="password"
                                         type="password"
@@ -101,7 +141,8 @@ const Login = () => {
                                         fullWidth
                                         variant="contained"
                                         color="primary"
-                                        style={{ marginTop: '30px' }} >
+                                        style={{ marginTop: '30px' }}
+                                    >
                                         Login
                                     </Button>
                                     <Grid container justify="flex-end" style={{ marginTop: '20px' }}>
@@ -129,4 +170,4 @@ const formStyle = {
     flexDirection: 'column'
 }
 
-export default Login
+export default withRouter(Login)

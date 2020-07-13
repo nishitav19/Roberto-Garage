@@ -8,6 +8,7 @@ import { Paper, Box, Container, Typography, Button, Hidden } from '@material-ui/
 import TextField from '@material-ui/core/TextField'
 import red from '@material-ui/core/colors/red'
 import Link from '@material-ui/core/Link'
+import { withRouter } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -87,6 +88,9 @@ const Register = (props) => {
                 }
             }
         }
+        if (name && email && password.length >= 6 && password2.length >= 6 && password === password2) {
+            props.history.push('/login')
+        }
     }
 
     const handleChange = (e) => {
@@ -115,7 +119,6 @@ const Register = (props) => {
                                         required
                                         id="outlined-required"
                                         label="Name"
-                                        defaultValue="Jonas Kahnwald"
                                         variant="outlined"
                                         name="name"
                                         onChange={handleChange}
@@ -125,7 +128,6 @@ const Register = (props) => {
                                         required
                                         id="outlined-required"
                                         label="Email"
-                                        defaultValue="jonaskahnwald@gmail.com"
                                         variant="outlined"
                                         name="email"
                                         onChange={handleChange}
@@ -135,7 +137,6 @@ const Register = (props) => {
                                         required
                                         id="outlined-required password"
                                         label="Password"
-                                        defaultValue="12345"
                                         variant="outlined"
                                         name="password"
                                         type="password"
@@ -146,7 +147,6 @@ const Register = (props) => {
                                         required
                                         id="outlined-required password"
                                         label="Confirm password"
-                                        defaultValue="12345"
                                         variant="outlined"
                                         name="password2"
                                         type="password"
@@ -158,7 +158,8 @@ const Register = (props) => {
                                         fullWidth
                                         variant="contained"
                                         color="primary"
-                                        style={{ marginTop: '30px' }} >
+                                        style={{ marginTop: '30px' }}
+                                    >
                                         Sign Up
                                     </Button>
                                     <Grid container justify="flex-end" style={{ marginTop: '20px' }}>
@@ -186,4 +187,4 @@ const formStyle = {
     flexDirection: 'column'
 }
 
-export default Register
+export default withRouter(Register)
