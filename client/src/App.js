@@ -5,7 +5,8 @@ import Services from './components/Services'
 import Contact from './components/Contact'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
-import New from './components/New'
+import Dashboard from './components/Dashboard'
+import ProtectedRoute from './components/ProtectedRoute'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
           <Route path='/contact' component={Contact} />
           <Route path='/register' component={Register} />
           <Route path='/login' component={Login} />
-          <Route path='/new' component={New} />
+          <ProtectedRoute path='/dashboard' component={Dashboard} />
         </Switch>
       </CssBaseline>
     </Router>

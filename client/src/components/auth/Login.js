@@ -71,6 +71,14 @@ const Login = (props) => {
             const res = await axios.post('/api/auth', body, config)
             console.log(res.data);
 
+            const token = res.data
+
+            sessionStorage.setItem("token", token)
+
+            if (token) {
+                props.history.push('/dashboard')
+            }
+
         } catch (error) {
             const errors = error.response.data.errors
             if (errors) {
@@ -80,18 +88,6 @@ const Login = (props) => {
                     alert(errors[0].msg)
                 }
             }
-        }
-    }
-    const initState = {
-        token: localStorage.getItem('token'),
-        isAuthenticated: false
-    }
-
-    const { token, isAuthenticated } = initState
-
-    if (token && isAuthenticated === true) {
-        if (email && password) {
-            props.history.push('/new')
         }
     }
 
