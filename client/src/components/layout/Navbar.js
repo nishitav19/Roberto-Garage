@@ -57,7 +57,6 @@ const pathVariants = {
     }
 }
 
-
 const Navbar = () => {
     const [sidemenu, setSidemenu] = useState({
         isOpen: false
@@ -77,77 +76,147 @@ const Navbar = () => {
 
     const classes = useStyles()
 
-    const sideList = () => (
-        <Box className={classes.menuSlider} component="div">
-            <div className={classes.drawerHeader}>
-                <IconButton onClick={handleClose}>
-                    <ChevronLeftIcon className={classes.iconColor} />
-                </IconButton>
-            </div>
-            <List className={classes.list}>
-                <ListItem button divider component={Link} to="/">
-                    <ListItemText primary="Home" />
-                </ListItem>
-                <ListItem button divider component={Link} to="/services">
-                    <ListItemText primary="Services" />
-                </ListItem>
-                <ListItem button divider component={Link} to="/contact">
-                    <ListItemText primary="Contact" />
-                </ListItem>
-                <ListItem button divider component={Link} to="/register">
-                    <ListItemText primary="Register/Login" />
-                </ListItem>
-            </List>
-        </Box>
-    )
+    const logout = () => {
+        sessionStorage.removeItem("token")
+        console.log(sessionStorage.getItem("token"));
+    }
 
-    return (
-        <Fragment>
-            <div className={classes.root}>
-                <AppBar position="fixed" style={{ background: '#212121' }}>
-                    <Toolbar>
-                        <Hidden mdUp>
-                            <IconButton onClick={handleClick} color="inherit" aria-label="menu">
-                                <MenuIcon />
-                            </IconButton>
-                        </Hidden>
-                        <Hidden xsDown>
-                            <motion.svg style={{
-                                width: '65px',
-                                overflow: 'visible',
-                                stroke: '#fff',
-                                strokeWidth: '5',
-                                strokeLinejoin: 'round',
-                                strokeLinecap: 'round'
-                            }} viewBox="340 180 160 100"
-                                variants={svgVariants}
-                                initial="hidden"
-                                animate="visible"
-                            >
-                                <motion.path
-                                    fill="none"
-                                    d="M 468 204 A 20 20 0 1 1 432 240 L 396 276 L 384 264 L 420 228 A 20 20 0 1 1 456 192 L 432 204 L 456 228 L 468 204 "
-                                    variants={pathVariants}
-                                />
-                            </motion.svg>
-                        </Hidden>
-                        <Typography variant="h6" className={classes.title}>
-                            Roberto & Co.
-                        </Typography>
-                        <MenuSlider open={sidemenu.isOpen} onClose={handleClose}>
-                            {sideList()}
-                        </MenuSlider>
-                        <Hidden smDown>
-                            <Button color="inherit" component={Link} to="/">Home</Button>
-                            <Button color="inherit" component={Link} to="/services">Services</Button>
-                            <Button color="inherit" component={Link} to="/contact">Contact</Button>
-                            <Button color="inherit" component={Link} to="/register">Register/Login</Button>
-                        </Hidden>
-                    </Toolbar>
-                </AppBar>
-            </div>
-        </Fragment >
-    );
+    const sideList = () => {
+        const token = sessionStorage.getItem("token");
+        return (
+            <Box className={classes.menuSlider} component="div">
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleClose}>
+                        <ChevronLeftIcon className={classes.iconColor} />
+                    </IconButton>
+                </div>
+                <List className={classes.list}>
+                    <ListItem button divider component={Link} to="/">
+                        <ListItemText primary="Home" />
+                    </ListItem>
+                    <ListItem button divider component={Link} to="/services">
+                        <ListItemText primary="Services" />
+                    </ListItem>
+                    <ListItem button divider component={Link} to="/contact">
+                        <ListItemText primary="Contact" />
+                    </ListItem>
+                    {token
+                        ? <div>
+                            <ListItem button divider component={Link} to="/dashboard">
+                                <ListItemText primary="Book" />
+                            </ListItem>
+                            <ListItem button divider component={Link} onClick={logout} to="/">
+                                <ListItemText primary="Logout" />
+                            </ListItem>
+                        </div>
+                        : <ListItem button divider component={Link} to="/register">
+                            <ListItemText primary="Register/Login" />
+                        </ListItem>
+                    }
+                </List>
+            </Box>
+        );
+    }
+
+    if (sessionStorage.getItem("token")) {
+        return (
+            <Fragment>
+                <div className={classes.root}>
+                    <AppBar position="fixed" style={{ background: '#212121' }}>
+                        <Toolbar>
+                            <Hidden mdUp>
+                                <IconButton onClick={handleClick} color="inherit" aria-label="menu">
+                                    <MenuIcon />
+                                </IconButton>
+                            </Hidden>
+                            <Hidden xsDown>
+                                <motion.svg style={{
+                                    width: '65px',
+                                    overflow: 'visible',
+                                    stroke: '#fff',
+                                    strokeWidth: '5',
+                                    strokeLinejoin: 'round',
+                                    strokeLinecap: 'round'
+                                }} viewBox="340 180 160 100"
+                                    variants={svgVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                >
+                                    <motion.path
+                                        fill="none"
+                                        d="M 468 204 A 20 20 0 1 1 432 240 L 396 276 L 384 264 L 420 228 A 20 20 0 1 1 456 192 L 432 204 L 456 228 L 468 204 "
+                                        variants={pathVariants}
+                                    />
+                                </motion.svg>
+                            </Hidden>
+                            <Typography variant="h6" className={classes.title}>
+                                Roberto & Co.
+                            </Typography>
+                            <MenuSlider open={sidemenu.isOpen} onClose={handleClose}>
+                                {sideList()}
+                            </MenuSlider>
+                            <Hidden smDown>
+                                <Button color="inherit" component={Link} to="/">Home</Button>
+                                <Button color="inherit" component={Link} to="/services">Services</Button>
+                                <Button color="inherit" component={Link} to="/contact">Contact</Button>
+                                <Button color="inherit" component={Link} to="/dashboard">Book</Button>
+                                <Button color="inherit" component={Link} onClick={logout} to="/">Logout</Button>
+                            </Hidden>
+                        </Toolbar>
+                    </AppBar>
+                </div>
+            </Fragment >
+        );
+    }
+    else {
+        return (
+            <Fragment>
+                <div className={classes.root}>
+                    <AppBar position="fixed" style={{ background: '#212121' }}>
+                        <Toolbar>
+                            <Hidden mdUp>
+                                <IconButton onClick={handleClick} color="inherit" aria-label="menu">
+                                    <MenuIcon />
+                                </IconButton>
+                            </Hidden>
+                            <Hidden xsDown>
+                                <motion.svg style={{
+                                    width: '65px',
+                                    overflow: 'visible',
+                                    stroke: '#fff',
+                                    strokeWidth: '5',
+                                    strokeLinejoin: 'round',
+                                    strokeLinecap: 'round'
+                                }} viewBox="340 180 160 100"
+                                    variants={svgVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                >
+                                    <motion.path
+                                        fill="none"
+                                        d="M 468 204 A 20 20 0 1 1 432 240 L 396 276 L 384 264 L 420 228 A 20 20 0 1 1 456 192 L 432 204 L 456 228 L 468 204 "
+                                        variants={pathVariants}
+                                    />
+                                </motion.svg>
+                            </Hidden>
+                            <Typography variant="h6" className={classes.title}>
+                                Roberto & Co.
+                            </Typography>
+                            <MenuSlider open={sidemenu.isOpen} onClose={handleClose}>
+                                {sideList()}
+                            </MenuSlider>
+                            <Hidden smDown>
+                                <Button color="inherit" component={Link} to="/">Home</Button>
+                                <Button color="inherit" component={Link} to="/services">Services</Button>
+                                <Button color="inherit" component={Link} to="/contact">Contact</Button>
+                                <Button color="inherit" component={Link} to="/register">Register/Login</Button>
+                            </Hidden>
+                        </Toolbar>
+                    </AppBar>
+                </div>
+            </Fragment >
+        );
+    }
 }
 
 export default Navbar
