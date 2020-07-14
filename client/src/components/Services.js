@@ -11,6 +11,7 @@ import grid3 from './images/grid3.jpg'
 import grid4 from './images/grid4.jpg'
 import grid5 from './images/grid5.jpg'
 import grid6 from './images/grid6.jpg'
+import bg2 from './images/bg2.jpg'
 import Navbar from './layout/Navbar'
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles'
 
@@ -33,9 +34,9 @@ function Services() {
         <Fragment>
             <Navbar />
             <ThemeProvider theme={theme}>
-                <Box>
+                <Box component="div" style={mainImgStyle}>
                     <Container maxWidth="sm">
-                        <Typography variant="h4" align="center" style={{ marginTop: '100px' }}>
+                        <Typography variant="h4" align="center" style={{ paddingTop: '100px' }}>
                             Services
                         </Typography>
                         <Card className={classes.root} data-aos="fade-up">
@@ -44,7 +45,7 @@ function Services() {
                                 height="250"
                                 style={Img1Style}
                             />
-                            <CardContent>
+                            <CardContent style={bgColor}>
                                 <Typography gutterBottom variant="h6" component="h2">
                                     Upholstery
                                 </Typography>
@@ -53,14 +54,13 @@ function Services() {
                                 </Typography>
                             </CardContent>
                         </Card>
-
                         <Card className={classes.root} data-aos="fade-up">
                             <CardMedia
                                 component="img"
                                 height="250"
                                 style={Img2Style}
                             />
-                            <CardContent>
+                            <CardContent style={bgColor}>
                                 <Typography gutterBottom variant="h6" component="h2">
                                     Repairs
                                </Typography>
@@ -71,14 +71,13 @@ function Services() {
                                </Typography>
                             </CardContent>
                         </Card>
-
                         <Card className={classes.root} data-aos="fade-up">
                             <CardMedia
                                 component="img"
                                 height="250"
                                 style={Img3Style}
                             />
-                            <CardContent>
+                            <CardContent style={bgColor}>
                                 <Typography gutterBottom variant="h6" component="h2">
                                     Paint
                                 </Typography>
@@ -88,29 +87,35 @@ function Services() {
                             </CardContent>
                         </Card>
                     </Container>
-                    <Typography variant="h4" align="center" style={{ marginTop: '100px' }}>
+                </Box>
+                <Box component="div" style={mainImgStyle}>
+                    <Typography variant="h4" align="center" style={{ paddingTop: '100px' }}>
                         Our Work
                         </Typography>
                     <Typography variant="h6" align="center" style={{ marginTop: '20px' }}>
                         A collection of cars we've renovated with passion
                         </Typography>
-                </Box>
-                <Container maxWidth="md">
-                    <div style={{ marginTop: '50px', marginBottom: '160px' }}>
-                        <div data-aos="fade-up" style={{ marginLeft: '15%' }}>
-                            <img src={grid2} alt="" style={gridImg} />
-                            <img src={grid3} alt="" style={gridImg} />
-                            <img src={grid4} alt="" style={gridImg} />
-                            <img src={grid5} alt="" style={gridImg} />
-                            <img src={grid1} alt="" style={gridImg} />
-                            <img src={grid6} alt="" style={gridImg} />
+                    <Container maxWidth="md">
+                        <div style={{ marginTop: '50px', paddingBottom: '160px' }}>
+                            <div data-aos="fade-up" style={{ marginLeft: '15%' }}>
+                                <img src={grid2} alt="" style={gridImg} />
+                                <img src={grid3} alt="" style={gridImg} />
+                                <img src={grid4} alt="" style={gridImg} />
+                                <img src={grid5} alt="" style={gridImg} />
+                                <img src={grid1} alt="" style={gridImg} />
+                                <img src={grid6} alt="" style={gridImg} />
+                            </div>
                         </div>
-                    </div>
-                </Container>
+                    </Container>
+                </Box>
             </ThemeProvider>
             <Footer />
         </Fragment>
     );
+}
+
+const bgColor = {
+    backgroundColor: '#f5f5f5'
 }
 
 const gridImg = {
@@ -134,6 +139,14 @@ const Img3Style = {
     background: 'url(' + paint + ')',
     backgroundSize: 'cover',
     backgroundPosition: 'center'
+}
+
+const mainImgStyle = {
+    background: 'url(' + bg2 + ')',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    minHeight: '700px',
+    backgroundBlendMode: 'lighten'
 }
 
 export default Services

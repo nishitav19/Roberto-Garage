@@ -33,8 +33,8 @@ const About = () => {
             <ThemeProvider theme={theme}>
                 <Container maxWidth="sm">
                     <Grid item xs={12} data-aos="fade-up">
-                        <Grid container justify="center" style={{ margin: '60px 0 60px 0' }}>
-                            <Paper elevation={3}>
+                        <Grid container justify="center" style={{ padding: '60px 0 60px 0' }}>
+                            <Paper elevation={3} style={{ backgroundColor: '#f5f5f5' }}>
                                 <Typography variant="h4" align="center" style={{ marginTop: '60px' }}>
                                     About
                                 </Typography>
@@ -56,7 +56,7 @@ const About = () => {
                             height="320"
                             style={ImgStyle}
                         />
-                        <CardContent>
+                        <CardContent style={{ backgroundColor: '#f5f5f5' }}>
                             <Typography gutterBottom variant="h5" component="h2">
                                 Lounge
                             </Typography>

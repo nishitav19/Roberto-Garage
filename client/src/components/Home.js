@@ -4,6 +4,7 @@ import About from './About'
 import Footer from './layout/Footer'
 import { Box } from '@material-ui/core'
 import two from './images/two.jpg'
+import bg2 from './images/bg2.jpg'
 
 const Home = () => {
 
@@ -12,7 +13,9 @@ const Home = () => {
             <Navbar />
             <Box component="div" style={mainImgStyle}>
             </Box>
-            <About />
+            <Box component="div" style={bgImgStyle}>
+                <About />
+            </Box>
             <Footer />
         </Fragment>
     )
@@ -20,6 +23,13 @@ const Home = () => {
 
 const mainImgStyle = {
     background: 'url(' + two + ')',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    minHeight: '700px'
+}
+
+const bgImgStyle = {
+    background: 'url(' + bg2 + ')',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     minHeight: '700px'
