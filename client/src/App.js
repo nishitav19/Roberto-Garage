@@ -6,6 +6,7 @@ import Contact from './components/Contact'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import Dashboard from './components/Dashboard'
+import Confirmation from './components/Confirmation'
 import ProtectedRoute from './components/ProtectedRoute'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/register' component={Register} />
           <Route path='/login' component={Login} />
           <ProtectedRoute path='/dashboard' component={Dashboard} />
+          <ProtectedRoute path='/confirmation' component={Confirmation} />
         </Switch>
       </CssBaseline>
     </Router>

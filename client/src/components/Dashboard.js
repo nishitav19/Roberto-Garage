@@ -6,6 +6,7 @@ import Footer from './layout/Footer'
 import { makeStyles } from '@material-ui/core/styles'
 import consult from './images/consult.jpg'
 import bg from './images/bg.jpg'
+import { withRouter } from 'react-router-dom'
 import { Box, Container, Typography, Button, Card, CardMedia, CardContent } from '@material-ui/core'
 import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles'
 
@@ -21,7 +22,7 @@ const useStyles = makeStyles({
     }
 });
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
     const classes = useStyles()
 
@@ -37,9 +38,9 @@ const Dashboard = () => {
         );
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('done');
+        props.history.push('/confirmation')
     }
 
     return (
@@ -62,7 +63,7 @@ const Dashboard = () => {
                                     Consultation
                                 </Typography>
                                 <Typography align="center" variant="body2" color="textSecondary" component="p">
-                                    2 hours - $100
+                                    Come visit us!
                                 </Typography>
                                 <Container align="center" style={{ paddingTop: '20px' }}>
                                     <form onSubmit={handleSubmit}>
@@ -113,5 +114,4 @@ const mainImgStyle = {
     backgroundBlendMode: 'lighten'
 }
 
-export default Dashboard
-
+export default withRouter(Dashboard)
